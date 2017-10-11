@@ -1,4 +1,4 @@
-# CVPZ [![Build status](https://ci.appveyor.com/api/projects/status/rwvr7jl20nw00eiu/branch/master?svg=true)](https://ci.appveyor.com/project/ssdugadmin21923/cvpz/branch/master) [![Build Status](https://travis-ci.org/ssdug/CVPZ.svg?branch=master)](https://travis-ci.org/ssdug/CVPZ) [![Join us](https://ssdug-slackin.azurewebsites.net/badge.svg)](https://ssdug-slackin.azurewebsites.net/)
+# CVPZ [![Build status](https://ci.appveyor.com/api/projects/status/rwvr7jl20nw00eiu/branch/master?svg=true)](https://ci.appveyor.com/project/ssdugadmin21923/cvpz/branch/master) [![Build Status](https://travis-ci.org/ssdug/CVPZ.svg?branch=master)](https://travis-ci.org/ssdug/CVPZ) [![Join us](https://webtasks.iamnotmyself.com/notmyself/ssdug-slackin/badge.svg)](https://webtasks.iamnotmyself.com/notmyself/ssdug-slackin/)
 
 ![CVPZ](docs/images/buisness_cat.jpg?raw=true "CVPZ")
 
@@ -10,7 +10,7 @@
 - [Getting Started](#getting-started)
 
   - [Running Locally from PowerShell](#running-locally-from-powershell)
-  - [Running Under Docker from PowerShell](#running-under-docker-from-powershell)
+  - [Running Under Docker from PowerShell or Bash](#running-under-docker-from-powershell-or-bash)
   - [Running Under Docker from Visual Studio 2017](#running-under-docker-from-visual-studio-2017)
 
 - [Architecture](#architecture)
@@ -27,7 +27,7 @@
 
 ## Who
 
-CVPZ is a community project created by the South Sound Developers User Group ([SSDUG](http://ssdug.org)) in lovely [Olympia, WA](http://olympiawa.gov/). The group is led by [Eve Ragins](https://github.com/orgs/ssdug/people/emragins) and this project was started and led by [Carter Barnes](https://github.com/orgs/ssdug/people/CarBar).
+CVPZ is a community project created by the South Sound Developers User Group ([SSDUG](http://ssdug.org)) in lovely [Olympia, WA](http://olympiawa.gov/). The group is led by [Eve Ragins](https://github.com/emragins) and this project was started and led by [Carter Barnes](https://github.com/CarBar).
 
 ## What
 
@@ -52,6 +52,7 @@ By having one common goal to work toward, we will share ideas and continually mo
 1. Change directory into the cloned repository `cd CVPZ`.
 1. Restore packages: `dotnet restore .\CVPZ.sln`.
 1. Open the project in VSCode `code-insiders .` or `code .` depending on what version you chose to install.
+    - Note: On Mac OS: after installing, open up VS Code, Press: Command + Shift + P and then type in and select `Shell Command : Install 'code' command in PATH`.  This will enable you to open VS Code from Terminal with the `code .` command.
 
 
 ### Running Locally from PowerShell
@@ -64,18 +65,20 @@ By having one common goal to work toward, we will share ideas and continually mo
     - This will hit the `api/health/ping` endpoint on all services.
 1. To shut down the image, execute the command `scripts\local_down.ps1`
 
-### Running Under Docker from PowerShell
+### Running Under Docker from PowerShell or Bash
 
 1. Ensure Docker for Windows is running and set to Linux containers.
 1. Open PowerShell.
 1. Change directory into the cloned repository `cd CVPZ`.
-1. Execute the command `scripts\docker_up.ps1 -r -b`.
+1. Execute the command `scripts\docker_up -r -b`.
 	- This will build the project and start all services running in the background.
-1. Execute the command `scripts\local_ping.ps1`
+1. Execute the command `scripts\services_ping`
 	- This will hit the `api/health/ping` endpoint on all services.
-1. To shut down the image, execute the command `scripts\docker_down.ps1`
+1. To shut down the image, execute the command `scripts\docker_down`
 
-**Note:** Docker is configured to expose ports for each service, so the local_ping scripts works for both workflows.
+**Note:** Docker is configured to expose ports for each service, so the services_ping scripts works for both workflows.
+
+**Note:** Under Bash scripts are run with the sudo command, so you may be prompted for your password when running them.
 
 ### Running Under Docker from Visual Studio 2017
 
